@@ -6,12 +6,50 @@ irreversible_after: 180  # minutes
 safety_buffer: 30        # minutes buffer before irreversible damage
 
 # Regional contacts based on geography
+location_map:
+  fresno: "americas"
+  sacramento: "americas"
+  la: "americas"
+  shanghai: "asia"
+  singapore: "asia"
+
 contacts:
   americas:
-    tech_hotline: "+15550123456"
-    qa_manager: "+15550789012"
-    emergency_manager: "+15550345678"
-    region_manager: "+15550456789"
+    emergency_manager:
+      name: "Taylor Reed"
+      role: "Emergency Response Manager"
+      phone: "6156384307"
+    qa_manager:
+      name: "Jamie Lin"
+      role: "Quality Assurance Manager"
+      phone: "6156384307"
+    region_manager:
+      name: "Alex Johnson"
+      role: "Regional Cold Chain Manager"
+      phone: "6156384307"
+
+protocol_summary:
+  - "Always confirm region using location_map."
+  - "Use only contacts listed in this context."
+  - "If temperature > 15°C or depot lead time too high, escalate to emergency contact."
+  - "Always format response using JSON block shown."
+
+example_output:
+  contact:
+    name: "Taylor Reed"
+    role: "Emergency Response Manager"
+    phone: "6156384307"
+  solution:
+    - "Call Taylor Reed to acknowledge alert and initiate ice delivery protocol."
+    - "Check depot lead time and buffer against time to breach."
+    - "Escalate to Fresno Medical Center if breach is imminent."
+
+contacts:
+  americas:
+    tech_hotline: "6156384307"
+    qa_manager: "6156384307"
+    emergency_manager: "6156384307"
+    region_manager: "6156384307"
   asia:
     tech_hotline: "+8611234567890"
     qa_manager: "+8611987654321"
@@ -26,7 +64,7 @@ ice_depots:
       lon: -119.7
       lead_minutes: 60
       capacity: "50kg dry ice"
-      phone: "+15550987654"
+      phone: "6156384307"
       contact: "Mike - Fresno Operations"
       region: "CA_Central"
     - name: "Sacramento Hub"
@@ -34,7 +72,7 @@ ice_depots:
       lon: -121.49
       lead_minutes: 45
       capacity: "75kg dry ice"
-      phone: "+15550543210"
+      phone: "6156384307"
       contact: "Sarah - Sacramento Logistics"
       region: "CA_North"
     - name: "LA Center"
@@ -42,8 +80,8 @@ ice_depots:
       lon: -118.24
       lead_minutes: 90
       capacity: "100kg dry ice"
-      phone: "+15550111222"
-      contact: "Carlos - LA Cold Storage"
+      phone: "6156384307"
+      contact: "Haijun Si - LA Cold Storage"
       region: "CA_South"
   asia:
     - name: "Shanghai Distribution"
@@ -52,7 +90,7 @@ ice_depots:
       lead_minutes: 75
       capacity: "80kg dry ice"
       phone: "+862112345678"
-      contact: "Li Wei - Shanghai Ops"
+      contact: "Tony Huang - Shanghai Ops"
       region: "CN_East"
     - name: "Singapore Hub"
       lat: 1.35
@@ -60,7 +98,7 @@ ice_depots:
       lead_minutes: 45
       capacity: "60kg dry ice"
       phone: "+6591234567"
-      contact: "Raj Patel - Singapore Logistics"
+      contact: "Tony Huang - Singapore Logistics"
       region: "SG_Central"
 
 # Emergency facilities for redirections
@@ -69,12 +107,12 @@ emergency_facilities:
     - name: "Fresno Medical Center"
       lat: 36.75
       lon: -119.72
-      phone: "+15559876543"
+      phone: "6156384307"
       capacity: "Emergency cold storage available"
     - name: "Sacramento General Hospital"
       lat: 38.56
       lon: -121.47
-      phone: "+15555432109"
+      phone: "6156384307"
       capacity: "24/7 pharmaceutical storage"
   asia:
     - name: "Shanghai Pudong Hospital"

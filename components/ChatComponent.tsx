@@ -8,8 +8,36 @@ interface Message {
 }
 
 export default function ChatComponent() {
+    const userMessage = `There is a temperature spike to 12°C in our Fresno location for our mRNA vaccine. We have 180 minutes before breach occurs.`
+    const message = `
+You are a cold chain incident responder. Only use the information provided in the following CONTEXT to generate your answer. Do not make up any names, phone numbers, or roles.
+
+
+TASK:
+Given the following temperature spike alert, do the following:
+1. Identify the appropriate person to call (with name, role, phone number)
+2. Provide a short step-by-step solution based on protocols
+
+ALERT:
+${userMessage}
+
+OUTPUT FORMAT:
+{
+  "contact": {
+    "name": "",
+    "role": "",
+    "phone": ""
+  },
+  "solution": [
+    "",
+    "",
+    ""
+  ]
+}
+`;
+
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(message);
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
@@ -35,6 +63,7 @@ export default function ChatComponent() {
           content: data.response 
         };
         setMessages(prev => [...prev, assistantMessage]);
+        console.log("DATA RESPONSE", JSON.parse(data.response).contact )
       } else {
         const errorMessage: Message = { 
           role: "assistant", 

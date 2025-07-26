@@ -8,6 +8,7 @@ import DemoControls from '@/components/DemoControls';
 import KPIDashboard from '@/components/KPIDashboard';
 import { mockShipments, mockDepots, type Shipment } from '@/lib/data/mockData';
 import { datadogService } from '@/lib/services/datadog';
+import Agent from '@/components/Agent';
 
 
 export default function ColdChainGuardian() {
@@ -223,6 +224,7 @@ export default function ColdChainGuardian() {
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       />
+      <div> <Agent /> </div>
     </div>
   );
 }
