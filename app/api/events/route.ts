@@ -1,4 +1,4 @@
-import { bus } from '@/lib/bus';
+import { bus } from '@/lib/core/bus';
 
 export const dynamic = 'force-dynamic';
 

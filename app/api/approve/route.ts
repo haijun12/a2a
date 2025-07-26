@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
-import { bus } from '@/lib/bus';
-import { generatePlan } from '@/lib/planning';
-import { vapiService } from '@/lib/vapi';
+import { bus } from '@/lib/core/bus';
+import { generatePlan } from '@/lib/core/planning';
+import { vapiService } from '@/lib/services/vapi';
 
 export async function PUT(req: NextRequest) {
   try {

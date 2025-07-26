@@ -1,7 +1,53 @@
 import { NextRequest } from 'next/server';
-import { bus } from '@/lib/bus';
-import { generatePlan, validatePlan } from '@/lib/planning';
-import { vapiService } from '@/lib/vapi';
+import { bus } from '@/lib/core/bus';
+import { generatePlan, validatePlan } from '@/lib/core/planning';
+import { vapiService } from '@/lib/services/vapi';
+
+// Datadog MCP Server integration
+async function queryDatadogMetrics() {
+  // This would integrate with Datadog MCP Server to query real metrics
+  // For demo purposes, return mock critical temperature alerts
+  const mockAlerts = [
+    {
+      id: 43,
+      temp: 11.8,
+      duration: 600,
+      lat: 37.77,
+      lon: -122.42,
+      minutes_to_failure: 180,
+      next_stop: {
+        city: "San Francisco",
+        eta_minutes: 45,
+        lat: 37.78,
+        lon: -122.41
+      },
+      product: "mRNA Vaccine",
+      tags: ["pallet:43", "lane:US-West"]
+    }
+  ];
+  
+  // Filter for critical temperature alerts (above 10°C threshold)
+  return mockAlerts.filter(alert => alert.temp > 10);
+}
+
+// Proactive monitoring endpoint
+export async function GET() {
+  try {
+    const alerts = await queryDatadogMetrics();
+    
+    return Response.json({ 
+      alerts,
+      timestamp: new Date().toISOString(),
+      status: 'monitoring'
+    });
+  } catch (error) {
+    console.error('❌ Error querying Datadog metrics:', error);
+    return Response.json(
+      { error: 'Failed to query metrics' },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {

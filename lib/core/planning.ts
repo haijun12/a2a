@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import { querySOPWithLlamaIndex } from './llama';
+import { querySOPWithLlamaIndex } from '../services/llama';
 
 const SOP_PATH = path.join(process.cwd(), 'data', 'sop_mrna_v1.md');
 

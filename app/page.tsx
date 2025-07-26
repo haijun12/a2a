@@ -6,7 +6,8 @@ import WorldMap from '@/components/WorldMap';
 import AlertDrawer from '@/components/AlertDrawer';
 import DemoControls from '@/components/DemoControls';
 import KPIDashboard from '@/components/KPIDashboard';
-import { mockShipments, mockDepots, type Shipment } from '@/lib/mockData';
+import { mockShipments, mockDepots, type Shipment } from '@/lib/data/mockData';
+import { datadogService } from '@/lib/services/datadog';
 
 
 export default function ColdChainGuardian() {
@@ -31,6 +32,12 @@ export default function ColdChainGuardian() {
     return () => {
       eventSource.close();
     };
+  }, []);
+
+  // Start Datadog MCP proactive monitoring
+  useEffect(() => {
+    // Start monitoring with 30-second intervals
+    datadogService.startProactiveMonitoring(30000);
   }, []);
 
   const handleMarkerClick = (shipment: Shipment) => {
