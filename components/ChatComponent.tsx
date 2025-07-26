@@ -9,7 +9,7 @@ interface Message {
 
 export default function ChatComponent() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("There is a temperature spike to 12C in our Fresno location for our mRNA vaccine. We have 180 minutes. Find the appropriate person to call and provide them a solution.");
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
